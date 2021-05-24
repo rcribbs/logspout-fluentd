@@ -10,7 +10,7 @@ FROM gliderlabs/logspout:${LOGSPOUT_VERSION} as logspout
 #
 # Build stage, build logspout with fluentd adapter
 #
-FROM golang:1.12.5-alpine3.9 as builder
+FROM golang:1-alpine as builder
 RUN apk add --update go build-base git mercurial ca-certificates git
 ENV GO111MODULE=on
 WORKDIR /go/src/github.com/gliderlabs/logspout
