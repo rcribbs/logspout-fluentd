@@ -12,5 +12,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-X main.Version=$1"
 
 FROM alpine
 WORKDIR /app
+ENV FLUENTD_HOST=localhost
+ENV FLUENTD_PORT=24224
 COPY --from=builder /bin/logspout /app/
-CMD ["./logspout"]
+CMD /app/logspout fluentd://$FLUENTD_HOST:$FLUENTD_PORT
