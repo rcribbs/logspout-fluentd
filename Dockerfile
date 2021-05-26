@@ -7,6 +7,7 @@ RUN go mod edit -require github.com/dsouzajude/logspout-fluentd@latest
 RUN cat modules.go | \
     awk '/^\)/ && !modif { printf("        _ \"github.com/dsouzajude/logspout-fluentd/fluentd\"\n"); modif=1 } {print}' \
     > modules.go
+RUN cat modules.go
 COPY src /go/src/github.com/dsouzajude/logspout-fluentd
 RUN echo "replace github.com/dsouzajude/logspout-fluentd => /go/src/github.com/dsouzajude/logspout-fluentd" >> go.mod
 RUN go mod download
